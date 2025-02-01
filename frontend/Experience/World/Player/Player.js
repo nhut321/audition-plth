@@ -22,12 +22,16 @@ export default class Player {
             controlOverlay: ".control-overlay",
             messageInput: "#chat-message-input",
             switchViewButton: ".switch-camera-view",
+            keyUp: "#keyboard_key_up",
+            keyRight: "#keyboard_key_right",
+            keyDown: "#keyboard_key_down",
+            keyLeft: "#keyboard_key_left",
         });
 
         this.initPlayer();
         this.initControls();
         this.setPlayerSocket();
-        this.setJoyStick();
+        // this.setJoyStick();
         this.addEventListeners();
     }
 
@@ -86,23 +90,28 @@ export default class Player {
         this.joystickVector = new THREE.Vector3();
     }
 
-    setJoyStick() {
-        this.options = {
-            zone: this.domElements.joystickArea,
-            mode: "dynamic",
-        };
-        this.joystick = nipplejs.create(this.options);
+    // setJoyStick() {
+    //     this.options = {
+    //         zone: this.domElements.joystickArea,
+    //         mode: "dynamic",
+    //     };
+    //     this.joystick = nipplejs.create(this.options);
 
-        this.joystick.on("move", (e, data) => {
-            this.actions.movingJoyStick = true;
-            this.joystickVector.z = -data.vector.y;
-            this.joystickVector.x = data.vector.x;
-        });
+    //     this.joystick.on("move", (e, data) => {
+    //         // this.actions.forward = true
+    //         this.player.animation = 'walking'
+    //         this.actions.movingJoyStick = true;
+    //         this.joystickVector.z = -data.vector.y;
+    //         this.joystickVector.x = data.vector.x;
+    //     });
 
-        this.joystick.on("end", () => {
-            this.actions.movingJoyStick = false;
-        });
-    }
+    //     this.joystick.on("end", () => {
+    //         this.actions.movingJoyStick = false;
+    //         this.player.animation = 'idle'
+    //     });
+    // }
+
+    
 
     setPlayerSocket() {
         this.socket.on("setID", (setID, name) => {});
@@ -332,6 +341,34 @@ export default class Player {
     }
 
     addEventListeners() {
+        this.domElements.keyUp.addEventListener("mousedown", () => {
+            this.onKeyDown({ code: "ArrowUp" });
+        });
+        this.domElements.keyUp.addEventListener("mouseup", () => {
+            this.onKeyUp({ code: "ArrowUp" });
+        });
+        
+        this.domElements.keyLeft.addEventListener("mousedown", () => {
+            this.onKeyDown({ code: "ArrowLeft" });
+        });
+        this.domElements.keyLeft.addEventListener("mouseup", () => {
+            this.onKeyUp({ code: "ArrowLeft" });
+        });
+        
+        this.domElements.keyRight.addEventListener("mousedown", () => {
+            this.onKeyDown({ code: "ArrowRight" });
+        });
+        this.domElements.keyRight.addEventListener("mouseup", () => {
+            this.onKeyUp({ code: "ArrowRight" });
+        });
+        
+        this.domElements.keyDown.addEventListener("mousedown", () => {
+            this.onKeyDown({ code: "ArrowDown" });
+        });
+        this.domElements.keyDown.addEventListener("mouseup", () => {
+            this.onKeyUp({ code: "ArrowDown" });
+        });
+        
         document.addEventListener("keydown", this.onKeyDown);
         document.addEventListener("keyup", this.onKeyUp);
     }

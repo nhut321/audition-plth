@@ -1,15 +1,18 @@
 .joystick-area {
-    width: 140px;
-    height: 140px;
+    // width: 140px;
+    // height: 140px;
     position: absolute;
     left: 5%;
     bottom: 5%;
-    background: $color-base-white-transparent;
+    // background: $color-base-white-transparent;
     z-index: 40;
     border-radius: 50% 50%;
     @include media(">=tablet") {
         display: none;
     }
+    display: inline-grid;
+  grid-column-gap: 0;
+  align-self: end;
 }
 
 .control-overlay {
@@ -21,3 +24,42 @@
     touch-action: none;
     z-index: 25;
 }
+
+.movements_control {
+    border: solid 1px black;  
+    margin: 1px;
+    padding: 0;
+  }
+  
+  .movements_control img {
+    width: inherit;
+    height: inherit;
+  }
+  
+  #keyboard_key_up {
+    grid-column-start: 2;
+  }
+  
+  #keyboard_key_left {
+    grid-column-start: 1;
+  }
+  
+  #keyboard_key_down {}
+  
+  #keyboard_key_right {
+    grid-column-start: 3;
+  }
+  
+  @media (min-width: 721px) {
+    .movements_control {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
+  @media (max-width: 720px) {
+    .movements_control {
+      width: 50px;
+      height: 50px;
+    }
+  }
