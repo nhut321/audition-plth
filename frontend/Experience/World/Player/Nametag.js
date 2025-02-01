@@ -58,6 +58,7 @@ export default class Nametag {
         label.scale.x = ctx.canvas.width * labelBaseScale;
         label.scale.y = ctx.canvas.height * labelBaseScale;
 
+        this.scene.add(label);
         return label;
 
         // this.scene.add(label);
@@ -69,3 +70,75 @@ export default class Nametag {
 
     update() {}
 }
+
+// import * as THREE from "three";
+// import Experience from "../../Experience.js";
+
+// export default class Nametag {
+//     constructor() {
+//         this.experience = new Experience();
+//         this.resources = this.experience.resources;
+//         this.scene = this.experience.scene;
+//         this.nametag = "";
+//         this.currentText = "";
+//         this.chatTimeout = null;
+//     }
+
+//     createNametag(size = 16, baseWidth = 150, name = "John Doe") {
+//         this.name = name;
+//         this.canvas = document.createElement("canvas");
+//         this.ctx = this.canvas.getContext("2d");
+//         this.updateText(name);
+
+//         this.texture = new THREE.CanvasTexture(this.canvas);
+//         this.texture.minFilter = THREE.LinearFilter;
+//         this.texture.wrapS = THREE.ClampToEdgeWrapping;
+//         this.texture.wrapT = THREE.ClampToEdgeWrapping;
+
+//         this.material = new THREE.SpriteMaterial({
+//             map: this.texture,
+//             transparent: true,
+//         });
+
+//         this.label = new THREE.Sprite(this.material);
+//         this.label.position.y = 5;
+//         const labelBaseScale = 0.01;
+//         this.label.scale.set(this.canvas.width * labelBaseScale, this.canvas.height * labelBaseScale, 1);
+
+//         return this.label;
+//     }
+
+//     updateText(text) {
+//         const borderSize = 2;
+//         const size = 16;
+//         const font = `200 ${size}px`;
+//         this.ctx.font = font;
+//         const textWidth = this.ctx.measureText(text).width;
+
+//         const width = Math.max(150, textWidth + borderSize * 2);
+//         const height = size + borderSize * 2;
+//         this.canvas.width = width;
+//         this.canvas.height = height;
+
+//         this.ctx.font = font;
+//         this.ctx.textBaseline = "middle";
+//         this.ctx.textAlign = "center";
+//         this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+//         this.ctx.fillRect(0, 0, width, height);
+
+//         this.ctx.fillStyle = "white";
+//         this.ctx.fillText(text, width / 2, height / 2);
+
+//         // this.texture.needsUpdate = true;
+//     }
+
+//     showChat(message) {
+//         this.updateText(message);
+//         clearTimeout(this.chatTimeout);
+//         this.chatTimeout = setTimeout(() => {
+//             this.updateText(this.name);
+//         }, 10000);
+//     }
+
+//     update() {}
+// }

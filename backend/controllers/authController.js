@@ -22,13 +22,21 @@ const loginUser = async (req, res) => {
         return res.status(401).json({ message: 'Mật khẩu sai' });
     }
 
+    console.log(user)
+
     // Tạo token JWT
     const token = jwt.sign({ userId: user._id, username: user.username, glbModels: user.glbModels }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // Chỉ lấy trường 'name' trong glbModels
+const filteredUser = {
+    ...user,
+    glbModels: user.glbModels.map(model => ({ name: model.name }))
+  };
 
     res.json({
         message: 'Đăng nhập thành công',
         token,
-        user: user.glbModels
+        user: filteredUser.glbModels
     });
 };
 

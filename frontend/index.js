@@ -2,6 +2,7 @@ import "./index.scss";
 import { io } from "socket.io-client";
 import Experience from "./Experience/Experience.js";
 import elements from "./Experience/Utils/functions/elements.js";
+import Nametag from "./Experience/World/Player/Nametag.js";
 
 
 
@@ -41,9 +42,9 @@ sessionStorage.clear();
 
 function loadSessionData() {
     const sessionModel = JSON.parse(sessionStorage.getItem("model-list")) || [];
-
+    
     const characterContainer = document.querySelector(".avatar-img-wrapper");
-
+    
     sessionModel.forEach((character) => {
         const characterElement = document.createElement("img");
         characterElement.src = `./images/${character.image}`;
@@ -54,8 +55,8 @@ function loadSessionData() {
         characterElement.style.pointerEvents = "auto";
         characterContainer.appendChild(characterElement);
     });
-
-
+    
+    
 }
 
 // 🔥 Lắng nghe sự kiện để cập nhật ngay khi sessionStorage thay đổi
@@ -65,11 +66,28 @@ window.addEventListener("sessionUpdated", loadSessionData);
 loadSessionData();
 //test
 
+//chat mobile
+const chatIcon = document.createElement("div");
+chatIcon.className = "chat-icon";
+chatIcon.innerHTML = "💬"; // Hoặc sử dụng SVG nếu muốn
+document.body.appendChild(chatIcon);
+
+const chatBox = document.querySelector(".chat-box");
+
+chatIcon.addEventListener("click", () => {
+    chatBox.classList.toggle("active");
+});
+//chat mobile
+
 // Experience ----------------------------------
 
 const experience = new Experience(domElements.canvas, updateSocket);
 
 // Sockets ----------------------------------
+
+//Nametag
+    // const nametag = new Nametag()
+//Nametag
 
 chatSocket.on("connect", () => {
     console.log("Connected to server with ID" + chatSocket.id);
@@ -166,6 +184,7 @@ function handleMessageSubmit(event) {
             getTime()
         );
         domElements.messageInput.value = "";
+        // nametag.showChat()
     }
 }
 

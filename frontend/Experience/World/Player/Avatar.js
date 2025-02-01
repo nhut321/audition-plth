@@ -4,7 +4,7 @@ import Nametag from "./Nametag.js";
 
 export default class Avatar {
     constructor(avatar, scene, name = "Anonymous", id) {
-        // console.log(avatar)
+        console.log(avatar)
         this.scene = scene;
         this.name = new Nametag();
         this.nametag = this.name.createNametag(16, 150, name);
@@ -24,9 +24,12 @@ export default class Avatar {
         this.setAnimation();
         this.scene.add(this.avatar);
 
-        if (this.avatar.userData.id) {
-            this.scene.add(this.nametag);
-        }
+        console.log('user data id: ' + JSON.stringify(this.avatar.userData.id))
+        this.scene.add(this.nametag);
+
+        // if (this.avatar.userData.id) {
+        //     this.scene.add(this.nametag);
+        // }
     }
 
     setAnimation() {
@@ -36,10 +39,10 @@ export default class Avatar {
 
         this.animation.actions = {};
 
-        // this.animation.actions.dancing = this.animation.mixer.clipAction(
-        //     this.avatar.animations[0]
-        // );
-        // console.log(this.avatar.animation)
+        this.animation.actions.dancing = this.animation.mixer.clipAction(
+            this.avatar.animations[0]
+        );
+        console.log(this.avatar.animation)
 
         this.animation.actions.idle = this.animation.mixer.clipAction(
             this.avatar.animations[1]

@@ -245,11 +245,11 @@ export default class Player {
             this.player.animation = "walking";
         }
 
-        // if (e.code === "KeyO") {
-        //     this.player.animation = "dancing";
-        // }
+        if (e.code === "KeyO") {
+            this.player.animation = "dancing";
+        }
 
-        if (e.code === "ShiftLeft") {
+        if (e.code === "ShiftLeft" || e.code === "ShiftRight") {
             this.actions.run = true;
             this.player.animation = "running";
         }
@@ -275,7 +275,7 @@ export default class Player {
             this.actions.right = false;
         }
 
-        if (e.code === "ShiftLeft") {
+        if (e.code === "ShiftLeft" || e.code === "ShiftRight") {
             this.actions.run = false;
         }
 
@@ -341,31 +341,35 @@ export default class Player {
     }
 
     addEventListeners() {
-        this.domElements.keyUp.addEventListener("mousedown", () => {
+        this.domElements.keyUp.addEventListener("touchstart", (e) => {
+            e.preventDefault(); // Ngừng hành động mặc định
             this.onKeyDown({ code: "ArrowUp" });
         });
-        this.domElements.keyUp.addEventListener("mouseup", () => {
+        this.domElements.keyUp.addEventListener("touchend", () => {
             this.onKeyUp({ code: "ArrowUp" });
         });
         
-        this.domElements.keyLeft.addEventListener("mousedown", () => {
+        this.domElements.keyLeft.addEventListener("touchstart", (e) => {
+            e.preventDefault(); // Ngừng hành động mặc định
             this.onKeyDown({ code: "ArrowLeft" });
         });
-        this.domElements.keyLeft.addEventListener("mouseup", () => {
+        this.domElements.keyLeft.addEventListener("touchend", () => {
             this.onKeyUp({ code: "ArrowLeft" });
         });
         
-        this.domElements.keyRight.addEventListener("mousedown", () => {
+        this.domElements.keyRight.addEventListener("touchstart", (e) => {
+            e.preventDefault(); // Ngừng hành động mặc định
             this.onKeyDown({ code: "ArrowRight" });
         });
-        this.domElements.keyRight.addEventListener("mouseup", () => {
+        this.domElements.keyRight.addEventListener("touchend", () => {
             this.onKeyUp({ code: "ArrowRight" });
         });
         
-        this.domElements.keyDown.addEventListener("mousedown", () => {
+        this.domElements.keyDown.addEventListener("touchstart", (e) => {
+            e.preventDefault(); // Ngừng hành động mặc định
             this.onKeyDown({ code: "ArrowDown" });
         });
-        this.domElements.keyDown.addEventListener("mouseup", () => {
+        this.domElements.keyDown.addEventListener("touchend", () => {
             this.onKeyUp({ code: "ArrowDown" });
         });
         
