@@ -6,7 +6,7 @@
     "scripts": {
         "frontend-dev": "vite --host",
         "frontend-build": "vite build --watch",
-        "backend-build": "node server.js",
+        "backend-build": "node backend/server.js",
         "backend-dev": "nodemon backend/index.js",
         "dev": "concurrently --kill-others \"npm run frontend-build\" \"npm run backend-dev\"",
         "start": "concurrently --kill-others \"npm run frontend-build\" \"npm run backend-build\"",
