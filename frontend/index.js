@@ -47,7 +47,7 @@ function loadSessionData() {
     
     sessionModel.forEach((character) => {
         const characterElement = document.createElement("img");
-        characterElement.src = `./images/${character.image}`;
+        characterElement.src = `${character.image}`;
         characterElement.alt = character.name;
         characterElement.dataset.id = character.name; // Thêm ID vào dataset
         characterElement.classList.add("avatar-img");

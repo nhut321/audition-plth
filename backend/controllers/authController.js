@@ -30,8 +30,10 @@ const loginUser = async (req, res) => {
     // Chỉ lấy trường 'name' trong glbModels
 const filteredUser = {
     ...user,
-    glbModels: user.glbModels.map(model => ({ name: model.name }))
+    glbModels: user.glbModels.map(model => ({ name: model.name, image: model.img }))
   };
+
+  console.log()
 
     res.json({
         message: 'Đăng nhập thành công',
