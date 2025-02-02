@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
 // Hàm đăng nhập
@@ -24,8 +23,7 @@ const loginUser = async (req, res) => {
 
     console.log(user)
 
-    // Tạo token JWT
-    const token = jwt.sign({ userId: user._id, username: user.username, glbModels: user.glbModels }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    
 
     // Chỉ lấy trường 'name' trong glbModels
 const filteredUser = {
@@ -37,7 +35,6 @@ const filteredUser = {
 
     res.json({
         message: 'Đăng nhập thành công',
-        token,
         user: filteredUser.glbModels
     });
 };
@@ -65,14 +62,7 @@ const registerUser = async (req, res) => {
         // Lưu người dùng vào cơ sở dữ liệu
         await newUser.save();
 
-        // Kiểm tra JWT_SECRET
-        if (!process.env.JWT_SECRET) {
-            return res.status(500).json({ message: 'Chưa định nghĩa JWT_SECRET trong biến môi trường' });
-        }
-
-        // Tạo JWT token
-        const token = jwt.sign({ userId: newUser._id, username: newUser.username, glbModels: newUser.glbModels }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
+        
         res.status(201).json({
             message: 'Đăng ký thành công',
             token
